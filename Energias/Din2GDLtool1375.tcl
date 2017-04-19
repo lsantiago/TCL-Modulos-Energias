@@ -73,7 +73,7 @@ set Fmax [expr $Impulso*$DuracionImp]
 # t0 F0 t1 F1
 #0  0  DI Fmax
 set dt $DuracionImp
-set fileName "C:/vlee/Dinamica/375/TCLOpenSees/FactoresDE/FacDforceCL.txt"
+set fileName "C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/FacDforceCL.txt"
 set serie1  "Series -dt $dt -filePath $fileName"
 pattern Plain 1 $serie1 {
 #     node Fx Fy
@@ -83,7 +83,7 @@ load 2 $Fmax 0
 # t0 F0 t1 F1
 #0  0  DI Fmax
 set dt1 $DuracionImp
-set fileName "C:/vlee/Dinamica/375/TCLOpenSees/FactoresDE/FacDforceCL.txt"
+set fileName "C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/FacDforceCL.txt"
 set serie2  "Series -dt $dt1 -filePath $fileName"
 pattern Plain 2 $serie2 {
 #     node Fx Fy
@@ -100,20 +100,20 @@ algorithm Newton
 integrator Newmark 0.5 0.25
 analysis Transient
 #Guardo los resultados: GDL 1
-recorder Node -file D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/Desplazamiento1.out  -time -node 2 -dof 1 disp
-recorder Node -file D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/Velocidad1.out  -time -node 2 -dof 1 vel
-recorder Node -file D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/Aceleracion1.out  -time -node 2 -dof 1 accel
-recorder Element -file D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/Fuerza1.out  -time -ele 1  localForce
-recorder Element -file D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/Fuerza2.out  -time -ele 2  localForce
+recorder Node -file C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/Desplazamiento1.out  -time -node 2 -dof 1 disp
+recorder Node -file C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/Velocidad1.out  -time -node 2 -dof 1 vel
+recorder Node -file C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/Aceleracion1.out  -time -node 2 -dof 1 accel
+recorder Element -file C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/Fuerza1.out  -time -ele 1  localForce
+recorder Element -file C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/Fuerza2.out  -time -ele 2  localForce
 #Guardo los resultados: GDL 2
-recorder Node -file D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/Desplazamiento2.out  -time -node 3 -dof 1 disp
-recorder Node -file D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/Velocidad2.out  -time -node 3 -dof 1 vel
-recorder Node -file D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/Aceleracion2.out  -time -node 3 -dof 1  accel
-recorder Element -file D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/Fuerza3.out  -time -ele 4  localForce
-recorder Element -file D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/Fuerza4.out  -time -ele 5  localForce
+recorder Node -file C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/Desplazamiento2.out  -time -node 3 -dof 1 disp
+recorder Node -file C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/Velocidad2.out  -time -node 3 -dof 1 vel
+recorder Node -file C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/Aceleracion2.out  -time -node 3 -dof 1  accel
+recorder Element -file C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/Fuerza3.out  -time -ele 4  localForce
+recorder Element -file C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/Fuerza4.out  -time -ele 5  localForce
 
-recorder Node -file D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/DesplazamientoT.out  -time -closeOnWrite -node 2 3 -dof 1 disp
-recorder Node -file D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/VelocidadT.out  -time -closeOnWrite -node 2 3 -dof 1 vel
+recorder Node -file C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/DesplazamientoT.out  -time -closeOnWrite -node 2 3 -dof 1 disp
+recorder Node -file C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/VelocidadT.out  -time -closeOnWrite -node 2 3 -dof 1 vel
 #EIGENVALUES
 set eigenvalues [eigen 2]
 set omega1 [expr sqrt([lindex $eigenvalues 0])] ;# Las frecuencias de vibracion son la raiz cuadrada de los valores propios
@@ -136,15 +136,16 @@ set npuntos [format "%.0f" [ expr $duracionA*pow($pasoA,-1)]]
 analyze $npuntos $pasoA
 
 
-set nameDespIn "D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/DesplazamientoT.out"
-set nameVelIn "D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/VelocidadT.out"
-set DirFileOut "D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias"
+set nameDespIn "C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/DesplazamientoT.out"
+set nameVelIn "C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/VelocidadT.out"
+set DirFileOut "C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias"
 
 
-source D:/Dropbox/VLEE (LABORATORIO VIRTUAL DE INGENIERÍA SÍSMICA)/TCL-Modulos/Energias/WriteEnerg.tcl
-writeEPoteYCine 0 $nameDespIn $DirFileOut $k
-writeEPoteYCine 1 $nameVelIn $DirFileOut $m
-writeEDisi $nameVelIn $DirFileOut $c
+source C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/WriteEnerg.tcl
+writeEPoteYCine 1 $nameDespIn $DirFileOut $k
+writeEPoteYCine 2 $nameVelIn $DirFileOut $m
+
+#writeEDisi $nameVelIn $DirFileOut $c
 
 
 set time [getTime] 

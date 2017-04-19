@@ -20,7 +20,7 @@
 
 
 # Llama al archivo utilerias
-source C:/vlee/Dinamica/377/TCLOpenSees/utilerias.tcl
+source C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/utilerias.tcl
 
 proc writeEPoteYCine {nameFile k} {
 
@@ -35,24 +35,28 @@ set Nlines [llength $t]
 puts $NumColum 
 	puts "Generando archivo energia potencial.out"
 	
+	# Genera el archivo en el que imprimen las energias 
+	set fileEPotencial [open C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/EPotencial.out w]
+
 	for {set i 1} {$i <= $NumColum} {incr i 1} {
 		
 		 puts [format "Desplazamiento leido%01d" $i] 
-		 # Genera el archivo en el que imprimen las energias 
-		 set fileEPotencial [open C:/vlee/Dinamica/377/TCLOpenSees/Resultados/EPotencial$i w]
+		
 		 set desp [lindex $datos $i]
 		 # Llama a la función que calcula la energia potencial
 		 set EPotencial [CalEPoteYCin $desp $k]
 		 
 		 	#Imprime las energias en columnas
 			for {set j 0} {$j < $Nlines} {incr j 1} {
-			set tiempo [lindex $t $j]
-			set energia [lindex $EPotencial $j]
-			puts $fileEPotencial "$tiempo $energia" 
+				#set tiempo [lindex $t $j]
+				set energia [lindex $EPotencial $j]
+				puts $fileEPotencial "$tiempo $energia" 
 			}
 			
 		 close $fileEPotencial 
 	 }
+
+
 }
 
 
@@ -73,7 +77,7 @@ set Nlines [llength $t]
 		
 		 puts [format "velocidad leida%01d" $i] 
 		 # Genera el archivo en el que imprimen las energias 
-		 set fileEDisi [open C:/vlee/Dinamica/377/TCLOpenSees/Resultados/EDisi$i w]
+		 set fileEDisi [open C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/EDisi$i w]
 		 set vel [lindex $datos $i]
 
 		 # Llama a la función que calcula la energia potencial

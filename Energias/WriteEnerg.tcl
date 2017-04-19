@@ -18,53 +18,53 @@
 # Ultima revisión: 14/02/2017                               #
 #############################################################
 
+# Unidades Julios (J)
 
 # Llama al archivo utilerias
-source C:/vlee/Dinamica/377/TCLOpenSees/utilerias.tcl
+source C:/Users/Administrador/Documents/GitHub/TCL-Modulos-Energias/Energias/utilerias.tcl
 
-proc writeEPoteYCine {nameFile DirFileOut k} {
+	proc writeEPoteYCine {Tipo nameFile DirFileOut k} {
 
-# Obtiene el número de columnas del archivo
-set NumColum [getNroColumnasDes $nameFile]
-# Lee los datos del archivo nameFile
-set datos [getAllDesplazamientos $nameFile]
-# La primera columna es el tiempo
-set t [lindex $datos 0]
-# Obtiene el número de lineas
-set Nlines [llength $t]
-puts $NumColum 
+	# Obtiene el número de columnas del archivo
+	set NumColum [getNroColumnasDes $nameFile]
+	# Lee los datos del archivo nameFile
+	set datos [getAllDesplazamientos $nameFile]
+	# Obtiene los datos relativos de desplazamiento
+	set datosRela [getRelDesplazamientos $nameFile] 
+
+	# La primera columna es el tiempo
+	set t [lindex $datosRela 0]
+	# Obtiene el número de lineas
+	set Nlines [llength $t]
+
 	puts "Generando archivo energia potencial.out"
 	
-	for {set i 1} {$i <= $NumColum} {incr i 1} {
-		
-		 puts [format "Desplazamiento leido%01d" $i] 
-		 # Genera el archivo en el que imprimen las energias 
-		 set fileEPotencial [open $DirFileOut/EPotencial$i w]
-		 set desp [lindex $datos $i]
-		 # Llama a la función que calcula la energia potencial
-		 #set k  [lindex $k $i-1]
-		 set EPotencial [CalEPoteYCin $desp [lindex $k $i-1]]   
-		 
-		 	#Imprime las energias en columnas
-			for {set j 0} {$j < $Nlines} {incr j 1} {
-			set tiempo [lindex $t $j]
-			set energia [lindex $EPotencial $j]
-			puts $fileEPotencial "$tiempo $energia" 
-			}
-			
-		 close $fileEPotencial 
-	 }
+	for {set i 1} {$i <= $NumColum} {incr i} {
+				
+		  if {$Tipo == 0} {
+			set desp [lindex $datosRela $i]
+		  } else {
+			 set desp [lindex $datos $i]
+		  }
+
+		  set EPotencial [CalEPoteYCin $desp [lindex $k $i-1]]   
+		  lappend allEnergias $EPotencial	
+				
+	} 
+	set allEnergias	
 }
+	
 
 
 proc writeEDisi {nameFile DirFileOut c} {
 
 # Obtiene el número de columnas del archivo
 set NumColum [getNroColumnasDes $nameFile]
-# Lee los datos del archivo nameFile
-set datos [getAllDesplazamientos $nameFile]
+# Obtiene los datos relativos de desplazamiento
+set datosRela [getRelDesplazamientos $nameFile] 
+
 # La primera columna es el tiempo
-set t [lindex $datos 0]
+set t [lindex $datosRela  0]
 # Obtiene el número de lineas
 set Nlines [llength $t]
 
@@ -75,7 +75,7 @@ set Nlines [llength $t]
 		 puts [format "velocidad leida%01d" $i] 
 		 # Genera el archivo en el que imprimen las energias 
 		 set fileEDisi [open $DirFileOut/EDisi$i w]
-		 set vel [lindex $datos $i]
+		 set vel [lindex $datosRela  $i]
 
 		 # Llama a la función que calcula la energia potencial
 		 set EDisi [CalEDisi $t $vel [lindex $c $i-1]]
@@ -91,4 +91,9 @@ set Nlines [llength $t]
 			
 		 close $fileEDisi 
 	 }
+}
+
+
+proc getEnergiaTotal {} {
+	
 }
