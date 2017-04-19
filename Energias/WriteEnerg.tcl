@@ -95,5 +95,5 @@ set Nlines [llength $t]
 
 
 proc getEnergiaTotal {} {
-	
+	#nuevo cambio
 }
